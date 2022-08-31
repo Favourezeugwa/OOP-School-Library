@@ -3,7 +3,7 @@ class Classroom
   attr_reader :students
 
   def initializer(label)
-    @label = 
+    @label = label
     @students = []
   end
 
@@ -11,5 +11,4 @@ class Classroom
     @students.push(student)
     student.classroom = self
   end
-
 end
