@@ -53,5 +53,16 @@ class App
     @person.push(teacher)
     puts "Person created successfully!"
   end
+
+  def create_book
+    puts "Book Title: "
+    title = gets.chomp()
+    puts "Author: "
+    author = gets.chomp()
+
+    book = Book.new(title, author)
+    @book.push(book)
+    puts "Book created successfully!"
+  end
 end
 

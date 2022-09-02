@@ -26,6 +26,8 @@ class Main
     case @response
     when 3
       @app.create_person
+    when 4
+      @app.create_book
     end
   end
 end
