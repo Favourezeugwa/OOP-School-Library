@@ -5,8 +5,8 @@ require_relative 'rental'
 
 class App
   def initialize
-    @person = []
-    @book = []
+    @people = []
+    @books = []
     @rental = []
   end
 
@@ -37,7 +37,7 @@ class App
     end
 
     student = Student.new(age, name, parent_permission)
-    @person.push(student)
+    @people.push(student)
     puts "Person created successfully!"
   end
 
@@ -50,8 +50,15 @@ class App
     specialization = gets.chomp()
 
     teacher = Teacher.new(age, name, specialization)
-    @person.push(teacher)
+    @people.push(teacher)
     puts "Person created successfully!"
+  end
+
+  def list_people
+    puts
+    @people.each do |person|
+      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age} "
+    end
   end
 
   def create_book
@@ -61,8 +68,33 @@ class App
     author = gets.chomp()
 
     book = Book.new(title, author)
-    @book.push(book)
+    @books.push(book)
     puts "Book created successfully!"
   end
+
+  def list_books
+    puts
+    @books.each do |book|
+      puts "Title: #{book.title}, Author: #{book.author}"
+    end
+  end
+
+  def create_rental
+    puts "Select book from the following list by number"
+    @books.each_with_index do |book, index|
+      puts "(#{index}) Title: #{book.title}, Author: #{book.author}"
+    end
+
+    puts "Select a person from the following list by number, not ID"
+    @people.each_with_index do |person, index|
+      puts "(#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age} "
+    end
+
+    puts "Date: "
+    date = gets.chomp()
+
+    puts "Rental created successfully!"
+  end
+
 end
 

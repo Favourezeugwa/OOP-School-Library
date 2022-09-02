@@ -24,10 +24,16 @@ class Main
   def start_app
     @response = gets.chomp().to_i
     case @response
+    when 1
+      @app.list_books
+    when 2
+      @app.list_people
     when 3
       @app.create_person
     when 4
       @app.create_book
+    when 5
+      @app.create_rental
     end
   end
 end
