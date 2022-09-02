@@ -7,7 +7,7 @@ class App
   def initialize
     @people = []
     @books = []
-    @rental = []
+    @rentals = []
   end
 
   def create_person
@@ -75,24 +75,28 @@ class App
   def list_books
     puts
     @books.each do |book|
-      puts "Title: #{book.title}, Author: #{book.author}"
+      puts "Title: \"#{book.title}\", Author: #{book.author}"
     end
   end
 
   def create_rental
-    puts "Select book from the following list by number"
+    puts "Select a book from the following list by number"
     @books.each_with_index do |book, index|
-      puts "(#{index}) Title: #{book.title}, Author: #{book.author}"
+      puts "#{index}) Title: #{book.title}, Author: #{book.author}"
     end
+    book_input = gets.chomp().to_i
 
-    puts "Select a person from the following list by number, not ID"
+    puts "Select a person from the following list by number"
     @people.each_with_index do |person, index|
-      puts "(#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age} "
+      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
+    person_input = gets.chomp().to_i
 
     puts "Date: "
     date = gets.chomp()
 
+    rental = Rental.new(date, @books[book_input], @people[person_input])
+    @rentals.push(rental)
     puts "Rental created successfully!"
   end
 
