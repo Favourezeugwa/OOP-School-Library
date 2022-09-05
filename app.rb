@@ -10,6 +10,7 @@ class App
     @rentals = []
   end
 
+  # CREATE PERSON
   def create_person
     puts 'Do you want to create a student (1) or teacher (2)? [Input the number]'
     input = gets.chomp.to_i
@@ -22,11 +23,18 @@ class App
     end
   end
 
+  # CREATE STUDENT
   def create_student
     puts 'student\'s age: '
     age = gets.chomp.to_i
+    if age < 5 || age > 65 || age.nil?
+      puts 'Sorry, a student must have a valid age'
+      return
+    end
+
     puts 'student\'s name: '
     name = gets.chomp
+
     puts 'does student have parent permission? [Y/N]'
     parent_permission = gets.chomp.capitalize
     case parent_permission
@@ -41,11 +49,18 @@ class App
     puts 'Person created successfully!'
   end
 
+  # CREATE TEACHER
   def create_teacher
     puts 'Teacher\'s age: '
     age = gets.chomp.to_i
+    if age < 18 || age > 65 || age.class != Integer || age.nil?
+      puts 'Sorry, a teacher must have a valid age'
+      return
+    end
+
     puts 'Teacher\'s name: '
     name = gets.chomp
+
     puts 'Specialization: '
     specialization = gets.chomp
 
@@ -54,6 +69,7 @@ class App
     puts 'Person created successfully!'
   end
 
+  # LIST PEOPLE
   def list_people
     puts
     @people.each do |person|
@@ -61,6 +77,7 @@ class App
     end
   end
 
+  # CREATE BOOK
   def create_book
     puts 'Book Title: '
     title = gets.chomp
@@ -72,6 +89,7 @@ class App
     puts 'Book created successfully!'
   end
 
+  # LIST BOOKS
   def list_books
     puts
     @books.each do |book|
@@ -79,6 +97,7 @@ class App
     end
   end
 
+  # CREATE RENTAL
   def create_rental
     puts 'Select a book from the following list by number'
     @books.each_with_index do |book, index|
@@ -100,6 +119,7 @@ class App
     puts 'Rental created successfully!'
   end
 
+  # LIST RENTALS
   def list_rentals
     list_people
     print 'ID of person: '
