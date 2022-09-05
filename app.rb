@@ -2,8 +2,9 @@ require_relative 'book'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
-require_relative 'list'
-require_relative 'gets'
+require_relative 'modules/list'
+require_relative 'modules/gets_puts'
+require_relative 'modules/validity'
 
 class App
   def initialize
@@ -14,90 +15,63 @@ class App
 
   include List
   include Gets
+  include Validity
 
   # CREATE PERSON
   def create_person
-    puts 'Do you want to create a student (1) or teacher (2)? [Input the number]'
-    input = gets.chomp.to_i
+    input = get_input('Do you want to create a student (1) or teacher (2)? [Input the number]')
     case input
-    when 1
+    when '1'
       create_student
-    when 2
+    when '2'
       create_teacher
-    else puts 'Invalid entry'
+    else 
+      put_label('Invalid entry')
     end
   end
 
   # CREATE STUDENT
   def create_student
-    puts 'student\'s age: '
-    age = gets.chomp.to_i
-    if age < 5 || age > 65 || age.class != Integer || age.nil?
-      puts 'Sorry, a student must have a valid age'
-      return
-    end
+    age = get_input_integer('Student\'s Age')
+    if_age(age)
 
-    puts 'student\'s name: '
-    name = gets.chomp
-    if name == ''
-      puts 'Invalid name'
-      return
-    end
-    
+    name = get_input('Student\'s Name')
+    if_name(name)
+
     puts 'Does student have parent permission? [Y/N]'
     parent_permission = gets.chomp.capitalize
-    case parent_permission
-    when 'Y'
-      true
-    when 'N'
-      false
-    else
-      puts 'Invalid entry'
-    end
+    case_parent_permission(parent_permission)
 
     student = Student.new(age, name, parent_permission)
     @people.push(student)
-    puts 'Person created successfully!'
+    put_label('Person created successfully!')
   end
 
   # CREATE TEACHER
   def create_teacher
-    puts 'Teacher\'s age: '
-    age = gets.chomp.to_i
-    if age < 18 || age > 65 || age.class != Integer || age.nil?
-      puts 'Sorry, a teacher must have a valid age'
-      return
-    end
+    age = gets_input_integer('Teacher\'s Age ')
+    if_age(age)
 
-    puts 'Teacher\'s name: '
-    name = gets.chomp
-    if name == ''
-      puts 'Invalid name'
-      return
-    end
+    name = get_input('Teacher\'s Name ')
+    if_name(name)
 
-    puts 'Specialization: '
-    specialization = gets.chomp
-    if specialization == ''
-      puts 'Invalid specialization'
-      return
-    end
+    specialization = get_input('Specialization')
+    if_specialization(specialization)
 
     teacher = Teacher.new(age, name, specialization)
     @people.push(teacher)
-    puts 'Person created successfully!'
+    put_label('Person created successfully!')
   end
+
 
   # CREATE BOOK
   def create_book
-    puts 'Book Title: '
-    title = gets.chomp
-    puts 'Author: '
-    author = gets.chomp
+    title = get_input('Book Title')
+    author = get_input('Author')
 
     book = Book.new(title, author)
     @books.push(book)
-    puts 'Book created successfully!'
+    put_label('Book created successfully!')
   end
 
   # CREATE RENTAL
@@ -115,6 +89,6 @@ class App
 
     rental = Rental.new(date, @books[book_input], @people[person_input])
     @rentals.push(rental)
-    puts 'Rental created successfully!'
+    put_label('Rental created successfully!')
   end
 end
