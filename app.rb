@@ -2,6 +2,9 @@ require_relative 'book'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
+require_relative 'modules/list'
+require_relative 'modules/gets_puts'
+require_relative 'modules/validity'
 
 class App
   def initialize
@@ -10,105 +13,74 @@ class App
     @rentals = []
   end
 
+  include List
+  include Gets
+  include Validity
+
   # CREATE PERSON
   def create_person
-    puts 'Do you want to create a student (1) or teacher (2)? [Input the number]'
-    input = gets.chomp.to_i
+    input = get_input('Do you want to create a student (1) or teacher (2)? [Input the number]')
     case input
-    when 1
+    when '1'
       create_student
-    when 2
+    when '2'
       create_teacher
-    else puts 'Invalid entry'
+    else
+      put_label('Invalid entry')
     end
   end
 
   # CREATE STUDENT
   def create_student
-    puts 'student\'s age: '
-    age = gets.chomp.to_i
-    if age < 5 || age > 65 || age.nil?
-      puts 'Sorry, a student must have a valid age'
-      return
-    end
+    age = get_input_integer('Student\'s Age')
+    if_age(age)
 
-    puts 'student\'s name: '
-    name = gets.chomp
+    name = get_input('Student\'s Name')
+    if_name(name)
 
-    puts 'does student have parent permission? [Y/N]'
+    puts 'Does student have parent permission? [Y/N]'
     parent_permission = gets.chomp.capitalize
-    case parent_permission
-    when 'Y'
-      true
-    when 'N'
-      false
-    end
+    case_parent_permission(parent_permission)
 
     student = Student.new(age, name, parent_permission)
     @people.push(student)
-    puts 'Person created successfully!'
+    put_label('Person created successfully!')
   end
 
   # CREATE TEACHER
   def create_teacher
-    puts 'Teacher\'s age: '
-    age = gets.chomp.to_i
-    if age < 18 || age > 65 || age.class != Integer || age.nil?
-      puts 'Sorry, a teacher must have a valid age'
-      return
-    end
+    age = get_input_integer('Teacher\'s Age ')
+    if_age(age)
 
-    puts 'Teacher\'s name: '
-    name = gets.chomp
+    name = get_input('Teacher\'s Name ')
+    if_name(name)
 
-    puts 'Specialization: '
-    specialization = gets.chomp
+    specialization = get_input('Specialization')
+    if_specialization(specialization)
 
     teacher = Teacher.new(age, name, specialization)
     @people.push(teacher)
-    puts 'Person created successfully!'
-  end
-
-  # LIST PEOPLE
-  def list_people
-    puts
-    @people.each do |person|
-      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age} "
-    end
+    put_label('Person created successfully!')
   end
 
   # CREATE BOOK
   def create_book
-    puts 'Book Title: '
-    title = gets.chomp
-    puts 'Author: '
-    author = gets.chomp
+    title = get_input('Book Title')
+    author = get_input('Author')
 
     book = Book.new(title, author)
     @books.push(book)
-    puts 'Book created successfully!'
-  end
-
-  # LIST BOOKS
-  def list_books
-    puts
-    @books.each do |book|
-      puts "Title: \'#{book.title}\', Author: #{book.author}"
-    end
+    put_label('Book created successfully!')
   end
 
   # CREATE RENTAL
   def create_rental
     puts 'Select a book from the following list by number'
-    @books.each_with_index do |book, index|
-      puts "#{index}) Title: '#{book.title}', Author: #{book.author}"
-    end
+    list_books
     book_input = gets.chomp.to_i
 
     puts 'Select a person from the following list by number'
-    @people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
+    list_people
     person_input = gets.chomp.to_i
 
     print 'Date: '
@@ -116,22 +88,6 @@ class App
 
     rental = Rental.new(date, @books[book_input], @people[person_input])
     @rentals.push(rental)
-    puts 'Rental created successfully!'
-  end
-
-  # LIST RENTALS
-  def list_rentals
-    list_people
-    print 'ID of person: '
-    input_id = gets.chomp.to_i
-    person = nil
-    @people.each do |item|
-      person = item if item.id == input_id
-    end
-
-    puts 'Rentals: '
-    person.rentals.each do |rental|
-      puts "Date #{rental.date}, Book '#{rental.book.title}', by #{rental.book.author} "
-    end
+    put_label('Rental created successfully!')
   end
 end
