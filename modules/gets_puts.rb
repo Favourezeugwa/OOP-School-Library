@@ -13,4 +13,3 @@ module Gets
     puts message
   end
 end
-

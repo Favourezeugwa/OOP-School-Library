@@ -25,7 +25,7 @@ class App
       create_student
     when '2'
       create_teacher
-    else 
+    else
       put_label('Invalid entry')
     end
   end
@@ -49,7 +49,7 @@ class App
 
   # CREATE TEACHER
   def create_teacher
-    age = gets_input_integer('Teacher\'s Age ')
+    age = get_input_integer('Teacher\'s Age ')
     if_age(age)
 
     name = get_input('Teacher\'s Name ')
@@ -62,7 +62,6 @@ class App
     @people.push(teacher)
     put_label('Person created successfully!')
   end
-
 
   # CREATE BOOK
   def create_book
