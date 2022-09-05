@@ -2,6 +2,8 @@ require_relative 'book'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
+require_relative 'list'
+require_relative 'gets'
 
 class App
   def initialize
@@ -9,6 +11,9 @@ class App
     @books = []
     @rentals = []
   end
+
+  include List
+  include Gets
 
   # CREATE PERSON
   def create_person
@@ -83,14 +88,6 @@ class App
     puts 'Person created successfully!'
   end
 
-  # LIST PEOPLE
-  def list_people
-    puts
-    @people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
-  end
-
   # CREATE BOOK
   def create_book
     puts 'Book Title: '
@@ -101,14 +98,6 @@ class App
     book = Book.new(title, author)
     @books.push(book)
     puts 'Book created successfully!'
-  end
-
-  # LIST BOOKS
-  def list_books
-    puts
-    @books.each_with_index do |book, index|
-      puts "#{index}) Title: '#{book.title}', Author: #{book.author}"
-    end
   end
 
   # CREATE RENTAL
@@ -127,21 +116,5 @@ class App
     rental = Rental.new(date, @books[book_input], @people[person_input])
     @rentals.push(rental)
     puts 'Rental created successfully!'
-  end
-
-  # LIST RENTALS
-  def list_rentals
-    list_people
-    print 'ID of person: '
-    input_id = gets.chomp.to_i
-    person = nil
-    @people.each do |item|
-      person = item if item.id == input_id
-    end
-
-    puts 'Rentals: '
-    person.rentals.each do |rental|
-      puts "Date #{rental.date}, Book '#{rental.book.title}', by #{rental.book.author} "
-    end
   end
 end
