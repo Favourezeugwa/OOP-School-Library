@@ -14,7 +14,7 @@ class App
     @rentals = []
     read_books
     read_people
-    # read_rentals
+    read_rentals
   end
 
   include List

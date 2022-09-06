@@ -1,12 +1,6 @@
 [
   {
-    "date" : "2021-09-18",
-    "book_title" : "Think like a man",
-    "book_author" : "Bradley Logan"
-  },
-  {
-    "date" : "2022-09-10",
-    "book_title" : "The smart money woman",
-    "book_author" : "Arese Ugwu"
+    "date" : "2023-04-05",
+    "rental_id" : 430
   }
 ]
