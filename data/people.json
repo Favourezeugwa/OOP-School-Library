@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "type": "Student",
+    "age": 18,
+    "name": "John Doe",
+    "parent_permission": true
+  },
+  {
+    "id": 2,
+    "type": "Student",
+    "age": 9,
+    "name": "Emily Doe",
+    "parent_permission": false
+  },
+  {
+    "id": 3,
+    "type": "Teacher",
+    "age": 45,
+    "name": "Mary Smith",
+    "specialization": "History"
+  }
+]
