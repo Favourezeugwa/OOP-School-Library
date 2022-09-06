@@ -14,6 +14,7 @@ class App
     @rentals = []
     read_books
     read_people
+    # read_rentals
   end
 
   include List
@@ -95,5 +96,6 @@ class App
     rental = Rental.new(date, @books[book_input], @people[person_input])
     @rentals.push(rental)
     put_label('Rental created successfully!')
+    store_rentals
   end
 end

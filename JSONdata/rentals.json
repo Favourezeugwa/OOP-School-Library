@@ -1,12 +1,12 @@
 [
   {
-    "date": "2019-01-01",
-    "book-title": "Think like a man",
-    "book-author": "Jay Shetty"
+    "date" : "2021-09-18",
+    "book_title" : "Think like a man",
+    "book_author" : "Bradley Logan"
   },
   {
-    "date": "2019-01-01",
-    "book-title": "The Smart money woman",
-    "book-author": "Arese Ugwu"
+    "date" : "2022-09-10",
+    "book_title" : "The smart money woman",
+    "book_author" : "Arese Ugwu"
   }
 ]

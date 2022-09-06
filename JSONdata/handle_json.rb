@@ -37,8 +37,7 @@ module FileHandler
 
   # READ STORED BOOKS
   def read_books
-    file  = File.read("JSONdata/books.json")
-    parse_file = JSON.parse(file)
+    parse_file = read_json("JSONdata/books.json")
     parse_file.map do |book|
       @books.push(Book.new(book["title"], book["author"]))
     end
@@ -89,5 +88,27 @@ module FileHandler
     end
   end
 
-  
+  # STORE RENTALS
+  def store_rentals
+    array = []
+    @rentals.each do |rental|
+      array.push(
+        {
+          "date": rental.date,
+          "book_title": rental.book.title,
+          "book_author": rental.book.author
+        }
+      )
+    end
+    write_json(array, "JSONdata/rentals.json")
+  end
+
+  # READ RENTALS
+  # def read_rentals
+  #   parse_file = read_json("JSONdata/rentals.json")
+  #   parse_file.map do |rental|
+  #     @rentals.push(Rental.new(rental['date'], rental['book.title'], rental["book.author"]))
+  #   end
+  # end
 end
+
