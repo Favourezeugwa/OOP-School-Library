@@ -5,7 +5,7 @@ require_relative 'rental'
 require_relative 'modules/list'
 require_relative 'modules/gets_puts'
 require_relative 'modules/validity'
-require_relative 'modules/handle_json'
+require_relative 'JSONdata/handle_json'
 
 class App
   def initialize
@@ -13,6 +13,7 @@ class App
     @books = []
     @rentals = []
     read_books
+    read_people
   end
 
   include List
