@@ -1,4 +1,4 @@
-require "json"
+require 'json'
 
 module FileHandler
   # WRITER
@@ -6,13 +6,11 @@ module FileHandler
     opts = {
       array_nl: "\n",
       object_nl: "\n",
-      indent: "  ",
-      space_before: " ",
-      space: " "
+      indent: '  ',
+      space_before: ' ',
+      space: ' '
     }
-    File.open(file_path, "w") { |f| 
-      f.write(JSON.generate(array, opts)) 
-    }
+    File.write(file_path, JSON.generate(array, opts))
   end
 
   # READER
@@ -27,62 +25,62 @@ module FileHandler
     @books.each do |book|
       array.push(
         {
-          "title": book.title, 
-          "author": book.author
+          title: book.title,
+          author: book.author
         }
       )
     end
-    write_json(array, "JSONdata/books.json")
+    write_json(array, 'JSONdata/books.json')
   end
 
   # READ STORED BOOKS
   def read_books
-    parse_file = read_json("JSONdata/books.json")
+    parse_file = read_json('JSONdata/books.json')
     parse_file.map do |book|
-      @books.push(Book.new(book["title"], book["author"]))
+      @books.push(Book.new(book['title'], book['author']))
     end
   end
 
   # STORE PEOPLE
   def store_people
     array = []
-    @people.each do |person|
+    @people.map do |person|
       if person.instance_of?(Student)
         array.push(
           {
-            "id": person.id,
-            "type": person.class,
-            "age": person.age,
-            "name": person.name,
-            "parent_permission": person.parent_permission
+            id: person.id,
+            type: person.class,
+            age: person.age,
+            name: person.name,
+            parent_permission: person.parent_permission
           }
         )
-        else
-          array.push(
+      else
+        array.push(
           {
-            "id": person.id,
-            "type": person.class,
-            "age": person.age,
-            "name": person.name,
-            "specialization": person.specialization
+            id: person.id,
+            type: person.class,
+            age: person.age,
+            name: person.name,
+            specialization: person.specialization
           }
         )
       end
     end
-    write_json(array, "JSONdata/people.json")
+    write_json(array, 'JSONdata/people.json')
   end
 
   # READ PEOPLE
   def read_people
-    parse_file = read_json("JSONdata/people.json")
+    parse_file = read_json('JSONdata/people.json')
     parse_file.map do |person|
-      if person['type'] == 'teacher'
+      if person['type'] == 'Teacher'
         teacher = Teacher.new(person['age'], person['name'], person['specialization'])
         teacher.id = person['id']
         @people.push(teacher)
       else
-        student = Student.new(person['age'], person["name"], person['parent_permission'])
-        id = person['id']
+        student = Student.new(person['age'], person['name'], person['parent_permission'])
+        student.id = person['id']
         @people.push(student)
       end
     end
@@ -94,13 +92,13 @@ module FileHandler
     @rentals.each do |rental|
       array.push(
         {
-          "date": rental.date,
-          "book_title": rental.book.title,
-          "book_author": rental.book.author
+          date: rental.date,
+          book_title: rental.book.title,
+          book_author: rental.book.author
         }
       )
     end
-    write_json(array, "JSONdata/rentals.json")
+    write_json(array, 'JSONdata/rentals.json')
   end
 
   # READ RENTALS
@@ -111,4 +109,3 @@ module FileHandler
   #   end
   # end
 end
-
