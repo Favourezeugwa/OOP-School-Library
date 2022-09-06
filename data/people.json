@@ -1,23 +1,23 @@
 [
   {
-    "id": 1,
-    "type": "Student",
-    "age": 18,
-    "name": "John Doe",
-    "parent_permission": true
+    "id" : 405,
+    "type" : "Student",
+    "age" : 34,
+    "name" : "Rex",
+    "parent_permission" : true
   },
   {
-    "id": 2,
-    "type": "Student",
-    "age": 9,
-    "name": "Emily Doe",
-    "parent_permission": false
+    "id" : 976,
+    "type" : "Teacher",
+    "age" : 45,
+    "name" : "Milani Mac",
+    "parent_permission" : true
   },
   {
-    "id": 3,
-    "type": "Teacher",
-    "age": 45,
-    "name": "Mary Smith",
-    "specialization": "History"
+    "id" : 29,
+    "type" : "Student",
+    "age" : 19,
+    "name" : "Adam Eve",
+    "parent_permission" : true
   }
 ]

@@ -9,10 +9,10 @@ require_relative 'modules/handle_json'
 
 class App
   def initialize
-    read_books
     @people = []
     @books = []
     @rentals = []
+    read_books
   end
 
   include List
@@ -31,6 +31,7 @@ class App
     else
       put_label('Invalid entry')
     end
+    store_people
   end
 
   # CREATE STUDENT

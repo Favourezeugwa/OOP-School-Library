@@ -23,20 +23,36 @@ module FileHandler
     array = []
     @books.each do |book|
       array.push(
-                  {
-                    "title": book.title, 
-                    "author": book.author
-                  }
-                )
+        {
+          "title": book.title, 
+          "author": book.author
+        }
+      )
     end
     write_json(array, "./data/books.json")
   end
 
   def read_books
-    # file = read_json("./data/books.json")
     file  = File.read("./data/books.json")
-    JSON.parse(file).each do |book|
+    parse_file = JSON.parse(file)
+    parse_file.map do |book|
       @books.push(Book.new(book["title"], book["author"]))
     end
+  end
+
+  def store_people
+    array = []
+    @people.each do |person|
+      array.push(
+        {
+          "id": person.id,
+          "type": person.class,
+          "age": person.age,
+          "name": person.name,
+          "parent_permission": person.parent_permission
+        }
+      )
+    end
+    write_json(array, "./data/people.json")
   end
 end
