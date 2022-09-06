@@ -5,9 +5,11 @@ require_relative 'rental'
 require_relative 'modules/list'
 require_relative 'modules/gets_puts'
 require_relative 'modules/validity'
+require_relative 'modules/handle_json'
 
 class App
   def initialize
+    read_books
     @people = []
     @books = []
     @rentals = []
@@ -16,6 +18,7 @@ class App
   include List
   include Gets
   include Validity
+  include FileHandler
 
   # CREATE PERSON
   def create_person
@@ -71,6 +74,7 @@ class App
     book = Book.new(title, author)
     @books.push(book)
     put_label('Book created successfully!')
+    store_books
   end
 
   # CREATE RENTAL
