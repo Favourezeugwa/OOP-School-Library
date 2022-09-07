@@ -107,9 +107,9 @@ module FileHandler
     parse_file = read_json('JSONdata/rentals.json')
     parse_file.map do |rental|
       date = rental['date']
-      book = @books.find { |book| book.title == rental['book_title'] }
-      person = @people.find { |person| person.id == rental['person_id']}
-      @rentals.push(Rental.new(date, book, person))
+      book1 = @books.find { |book| book.title == rental['book_title'] }
+      person1 = @people.find { |person| person.id == rental['person_id'] }
+      @rentals.push(Rental.new(date, book1, person1))
     end
   end
 end
