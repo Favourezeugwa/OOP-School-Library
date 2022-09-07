@@ -4,7 +4,7 @@ describe Teacher do
   let(:teacher) { Teacher.new(35, 'Mrs Rowling', 'Literature') }
 
   describe '#new' do
-    it 'takes three arguments and returns a Student object' do
+    it 'takes three arguments and returns a Teacher object' do
       expect(teacher).to be_an_instance_of(Teacher)
     end
   end
