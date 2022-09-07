@@ -93,7 +93,9 @@ module FileHandler
       array.push(
         {
           date: rental.date,
-          rental_id: rental.person.id
+          person_id: rental.person.id,
+          book_title: rental.book.title,
+          person_name: rental.person.name
         }
       )
     end
@@ -102,8 +104,12 @@ module FileHandler
 
   # READ RENTALS
   def read_rentals
-    parse_file = read_json("JSONdata/rentals.json")
+    parse_file = read_json('JSONdata/rentals.json')
     parse_file.map do |rental|
+      date = rental['date']
+      book = @books.find { |book| book.title == rental['book_title'] }
+      person = @people.find { |person| person.id == rental['person_id']}
+      @rentals.push(Rental.new(date, book, person))
     end
   end
 end
