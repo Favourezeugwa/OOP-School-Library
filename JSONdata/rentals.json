@@ -1,0 +1,20 @@
+[
+  {
+    "date" : "2022-08-05",
+    "person_id" : 334,
+    "book_title" : "The smart money woman",
+    "person_name" : "Mr Swift"
+  },
+  {
+    "date" : "2013-03-05",
+    "person_id" : 741,
+    "book_title" : "Think like a man",
+    "person_name" : "Mrs Anderson"
+  },
+  {
+    "date" : "2013-06-14",
+    "person_id" : 741,
+    "book_title" : "The smart money woman",
+    "person_name" : "Mrs Anderson"
+  }
+]

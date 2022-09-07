@@ -5,17 +5,22 @@ require_relative 'rental'
 require_relative 'modules/list'
 require_relative 'modules/gets_puts'
 require_relative 'modules/validity'
+require_relative 'JSONdata/handle_json'
 
 class App
   def initialize
     @people = []
     @books = []
     @rentals = []
+    read_books
+    read_people
+    read_rentals
   end
 
   include List
   include Gets
   include Validity
+  include FileHandler
 
   # CREATE PERSON
   def create_person
@@ -28,6 +33,7 @@ class App
     else
       put_label('Invalid entry')
     end
+    store_people
   end
 
   # CREATE STUDENT
@@ -71,6 +77,7 @@ class App
     book = Book.new(title, author)
     @books.push(book)
     put_label('Book created successfully!')
+    store_books
   end
 
   # CREATE RENTAL
@@ -89,5 +96,6 @@ class App
     rental = Rental.new(date, @books[book_input], @people[person_input])
     @rentals.push(rental)
     put_label('Rental created successfully!')
+    store_rentals
   end
 end
