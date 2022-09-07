@@ -15,6 +15,8 @@ module FileHandler
 
   # READER
   def read_json(file_path)
+    return unless File.exist?(file_path)
+
     file = File.read(file_path)
     JSON.parse(file)
   end
