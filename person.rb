@@ -1,7 +1,7 @@
 require_relative 'capitalize_decor'
 require_relative 'trimmer_decor'
 
-class Person 
+class Person
   attr_accessor :name, :age, :rentals, :parent_permission, :id
 
   def initialize(age, name = 'unknown', parent_permission: true)
