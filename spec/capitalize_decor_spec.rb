@@ -1,8 +1,8 @@
 require_relative 'spec_helper'
 
 describe CapitalizeDecorator do
-  let(:person) { Person.new(28, 'pokemon')}
-  let(:capitalize) { CapitalizeDecorator.new(person)}
+  let(:person) { Person.new(28, 'pokemon') }
+  let(:capitalize) { CapitalizeDecorator.new(person) }
 
   describe '#capitalize' do
     it 'returns an instance of the Capitalize decor' do
@@ -17,4 +17,3 @@ describe CapitalizeDecorator do
     end
   end
 end
-
